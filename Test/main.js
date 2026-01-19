@@ -1,12 +1,20 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const windowstateKeeper = require('electron-window-state');
 
 
 function createWindow() {
+    const mainWindowState=windowstateKeeper({
+        defaultWidth:500,
+        defaultHeight:600
+    })
     const win = new BrowserWindow({
-        width: 500,
-        height: 600,
+        x: mainWindowState.x,
+        y: mainWindowState.y,
+        width: mainWindowState.width,
+        height: mainWindowState.height,
         alwaysOnTop: true,
+        autoHideMenuBar: true,
         // frame: false,
         // resizable: false,
         title:"Tic Tac Toe",
@@ -17,6 +25,7 @@ function createWindow() {
     });
 
     win.loadFile('index.html');
+    mainWindowState.manage(win);
 }
 
 app.on('before-quit',(e)=>{
