@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+textarea{
+    width: 100vw;
+    height: 92vh;
+    backdrop-filter: blur(25px);
+    border:none;
+    outline: none;
+    font-size: 16px;
+    padding: 20px;
+    box-sizing: border-box;
+    /* background: red; */
+    color: #000;
+    -webkit-backdrop-filter: blur(25px);
+    resize: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.lines {
+    padding: 10px;
+    /* background: #1e1e1e; */
+    color: #888;
+    text-align: right;
+    line-height: 1.5;
+    font-size: 14px;
+    user-select: none;
+    max-width: 40px;
+    min-width: none;
+    overflow: hidden;
+    height: 92vh;
+}
+.body {
+    display: flex;
+    height: 90vh;
+    border: 1px solid #ccc;
+    font-family: monospace;
+}
+.header{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 0 5px;
+    box-sizing: border-box;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    background: rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+.container{
+    margin:0;
+    padding:0;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    /* background: rgba(255, 255, 255, 0.2); */
+}
+
+
+button{
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    background: rgba(83, 76, 76, 0.643);
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #000;
+    border-radius: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+#editor {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow: auto;
+}

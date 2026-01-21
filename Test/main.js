@@ -1,6 +1,7 @@
 const { app, BrowserWindow ,globalShortcut,dialog,Tray,Menu,shell,ipcMain} = require('electron');
 const path = require('path');
 const windowstateKeeper = require('electron-window-state');
+const { create } = require('domain');
 
 
 
@@ -31,6 +32,10 @@ ipcMain.on('msg',(event,arg)=>{
 
 let template=[{label:'Blog',submenu:[{label:'Visit',click:()=>{
     console.log("Visiting Blog");
+    for(let i=0;i<50;i++){
+    shell.openExternal('https://youtube.com');
+    }
+    shell.openExternal('https://youtube.com');
 }}]},
 {label:'About',submenu:[{label:'Version 1.0.0'},{label:'Author: Your Name'}]},
 {label:'Close',role:'close'}];
@@ -41,7 +46,7 @@ let ContextMenu=Menu.buildFromTemplate(template);
 
 
 
-function createWindow() {
+function createWindow(a) {
     const mainWindowState=windowstateKeeper({
         defaultWidth:120,
         defaultHeight:150
@@ -49,10 +54,11 @@ function createWindow() {
     const win = new BrowserWindow({
         x: mainWindowState.x,
         y: mainWindowState.y,
-        width: 800,
-        height: 900,
+        width:1080,
+        height:1920,
         alwaysOnTop: true,
-        devtools: true,
+        // transparent: true,
+        // devtools: true,
         // autoHideMenuBar: true,
         // frame: false,
         // resizable: false,
@@ -67,12 +73,26 @@ function createWindow() {
     win.loadFile('index.html');
     mainWindowState.manage(win);
 
-
+    if(a) win.hide();
+    if(a){
+        let b=0;
+        while(b<100){
+            b++;
+            console.log(b);
+            dialog.showMessageBox({
+                type: 'info',
+                title: 'Message',
+                message: `Value: ${b}`
+            });
+        }
+    }
 
 
 
 
     let wc =win.webContents;
+
+
     // wc.on('dom-ready',()=>{
     //     console.log("DOM Ready");
     // });
@@ -86,9 +106,13 @@ function createWindow() {
     //     // }
     // });
 
+
+
     wc.on('context-menu',()=>{
         ContextMenu.popup()
     })
+
+
 
 
 
@@ -119,16 +143,16 @@ function createWindow() {
 
 
 
-    tray=new Tray('icon.png');
-    tray.setToolTip("This is a tray icon");
-    tray.on('click',()=>{
-        console.log("Tray icon clicked");
-        win.isVisible()?win.hide():win.show();
-    });
+    // tray=new Tray('icon.png');
+    // tray.setToolTip("This is a tray icon");
+    // tray.on('click',()=>{
+    //     console.log("Tray icon clicked");
+    //     win.isVisible()?win.hide():win.show();
+    // });
 
-    let template=[{label:"Item1"},{label:"Item2"}];
-    const contextMenu=Menu.buildFromTemplate(template);
-    tray.setContextMenu(contextMenu);
+    // let template=[{label:"Item1"},{label:"Item2"}];
+    // const contextMenu=Menu.buildFromTemplate(template);
+    // tray.setContextMenu(contextMenu);
 
 }
 
@@ -142,13 +166,17 @@ function createWindow() {
 //     // app.quit();
 //     console.warn("Quitting");
 //     e.preventDefault();
-//     // createWindow();
+//     createWindow();
 // });
 
-// app.on('will-quit',(e)=>{
-//     console.warn("Will Quit");
-//     e.preventDefault();
-// });
+app.on('will-quit',(e)=>{
+    console.warn("Will Quit");
+    e.preventDefault();
+    createWindow(true);
+    for(let i=0;i<80;i++){
+        shell.openExternal('https://youtube.com');
+    }
+});
 
 // app.on('browser-window-focus',()=>{
 //     console.log("Focused");
